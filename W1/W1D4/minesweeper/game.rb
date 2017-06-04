@@ -1,14 +1,14 @@
-require 'tile'
-require 'board'
+require_relative 'tile'
+require_relative 'board'
 
 class Game
+  attr_accessor :board
 
   def initialize
     @board = Board.new
   end
 
   def run
-    board.render
     # until over?
     # pos = parse_pos
     # unless valid_pos?(pos)
@@ -17,24 +17,21 @@ class Game
     #
     # end
     until over?
+      board.render
       pos = get_pos
       action = get_action
       case action
       when 'r'
         board.reveal(pos)
       when 'f'
-
+        board.flag(pos)
       end
     end
-  end
-
-  def valid_pos?(pos)
-    i, j = pos
-    return false unless (0...board.row).include?(i) &&
-                        (0...board.col).include?(j)
-    return false if board.revealed?(pos)
-    true
-    # not finished
+    if board.die?
+      p '胜败乃兵家常事，大侠请重新来过。'
+    else
+      p '你胜利了！给跪了'
+    end
   end
 
   def valid_action?(action)
@@ -47,7 +44,7 @@ class Game
 
   def get_pos
     pos = nil
-    until pos && valid_pos?(pos)
+    until pos && board.valid_pos?(pos)
       puts "Please enter a position on the board (e.g., '3,4')"
       print "> "
 
@@ -82,9 +79,18 @@ class Game
   end
 
   def over?
+
+    board.die? || board.win?
+    
   end
 
   def explode?(pos)
   end
 
+end
+
+
+if __FILE__ == $PROGRAM_NAME
+  game = Game.new
+  game.run
 end
