@@ -11,21 +11,29 @@ class TicTacToeNode
   end
 
   def losing_node?(evaluator)
-    return true if board.over? && board.winner != evaluator
+     if board.over?
+       if board.winner == evaluator || board.winner.nil?
+         return false
+       else
+         return true
+       end
+     end
 
-    if next_mover_mark == evaluator
+    if next_mover_mark != evaluator
       # Opponent's turn
-      children.all? { |child| child.losing_node?(evaluator) }
+      children.any? { |child| child.losing_node?(evaluator) }
     else
       # Evaluator's turn
-      children.any? { |child| child.losing_node?(evaluator) }
+      children.all? { |child| child.losing_node?(evaluator) }
     end
   end
 
   def winning_node?(evaluator)
-    return true if board.over? && board.winner == evaluator
+    if board.over?
+      return board.winner == evaluator
+    end
 
-    if next_mover_mark == evaluator
+    if next_mover_mark != evaluator
       # Opponent's turn
       children.all? { |child| child.winning_node?(evaluator) }
     else
