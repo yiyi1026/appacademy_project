@@ -38,7 +38,7 @@ class Game
 
   def take_turn(player)
     letter = player.guess
-    letter_array = ('a'..'z').to_a +("A".."Z").to_a
+    letter_array = ('a'..'z').to_a + ("A".."Z").to_a
     until letter.length == 1  && letter_array.include?(letter)
       player.alert_invalid_guess
       letter = player.guess
@@ -102,12 +102,14 @@ if __FILE__ == $PROGRAM_NAME
   mary = Player.new("Mary")
   jack = Player.new("Jack")
   players=[mary,jack]
+  dictionary={}
+  File.foreach("dictionary.txt") do |line|
+    a = line.chomp
+    dictionary[a] = true
+  end
   game = Game.new(players,'a', dictionary)
   game.take_turn(mary)
 end
 
-dictionary={}
-File.foreach("dictionary.txt") do |line|
-  a = line.chomp
-  dictionary[a] = true
-end
+
+# p dictionary
