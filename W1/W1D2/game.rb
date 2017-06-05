@@ -12,7 +12,7 @@ class Game
   end
 
   def play
-    byebug
+    # byebug
     i = 0
     pos = [nil, nil]
     until board.won?
