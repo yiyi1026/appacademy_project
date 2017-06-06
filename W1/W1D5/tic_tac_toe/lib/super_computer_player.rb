@@ -4,7 +4,6 @@ require_relative 'tic_tac_toe'
 class SuperComputerPlayer < ComputerPlayer
   def move(game, mark)
     node = TicTacToeNode.new(game.board, mark)
-    # next_mark = mark == :x ? :o : :x
     winning_moves = node.children.select do |child|
       child.winning_node?(mark)
     end
