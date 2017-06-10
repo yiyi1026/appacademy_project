@@ -8,19 +8,16 @@ class HashSet
     @count = 0
   end
 
-  def insert(key)
-    unless include?(key)
-      if @count == @store.length
-        resize!
-      end
-      index = insertion_index(key)
-      @store[index] << key
-      @count += 1
-    end
-  end
-
   def include?(key)
     self[key].include?(key)
+  end
+
+  def insert(key)
+    return false if include?(key)
+    resize! if @count >= num_buckets
+    self[key] << key
+    @count += 1
+    key
   end
 
   def remove(key)
@@ -29,18 +26,9 @@ class HashSet
 
   private
 
-  def insertion_index(num)
-    num.hash % @store.length
-  end
-
   def [](num)
-    index = insertion_index(num)
+    index = num.hash % num_buckets
     @store[index]
-  end
-
-  def []=(num, val)
-    index = insertion_index(num)
-    @store[index] = val
   end
 
   def num_buckets
@@ -48,17 +36,11 @@ class HashSet
   end
 
   def resize!
-    temp_array = []
-    @store.each do |subarray|
-      until subarray.empty?
-        temp_array << subarray.pop
-      end
-    end
-
-    @store = Array.new(@store.length * 2) { Array.new }
     @count = 0
+    temp_array = @store.flatten
+    @store = Array.new(num_buckets * 2) { Array.new }
     temp_array.each do |el|
-      self.insert(el)
+      insert(el)
     end
   end
 end

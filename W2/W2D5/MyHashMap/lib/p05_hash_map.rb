@@ -1,11 +1,10 @@
 require_relative 'p02_hashing'
 require_relative 'p04_linked_list'
-require "byebug"
 
 class HashMap
   include Enumerable
+
   attr_reader :count
-  attr_accessor :store
 
   def initialize(num_buckets = 8)
     @store = Array.new(num_buckets) { LinkedList.new }
@@ -20,9 +19,7 @@ class HashMap
     if include?(key)
       bucket(key).update(key, val)
     else
-      if @count == @store.length
-        resize!
-      end
+      resize! if @count == num_buckets
       bucket(key).append(key, val)
       @count += 1
     end
@@ -34,26 +31,26 @@ class HashMap
 
   def delete(key)
     if include?(key)
-      bucket(key).remove(key)
       @count -= 1
+      bucket(key).remove(key)
     end
   end
 
   def each(&prc)
-    @store.each do |link|
-      link.each do |el|
-        prc.call(el.key, el.val)
+    @store.each do |bucket|
+      bucket.each do |link|
+        prc.call(link.key, link.val)
       end
     end
   end
 
   # uncomment when you have Enumerable included
-  # def to_s
-  #   pairs = inject([]) do |strs, (k, v)|
-  #     strs << "#{k.to_s} => #{v.to_s}"
-  #   end
-  #   "{\n" + pairs.join(",\n") + "\n}"
-  # end
+  def to_s
+    pairs = inject([]) do |strs, (k, v)|
+      strs << "#{k.to_s} => #{v.to_s}"
+    end
+    "{\n" + pairs.join(",\n") + "\n}"
+  end
 
   alias_method :[], :get
   alias_method :[]=, :set
@@ -62,13 +59,8 @@ class HashMap
 
   def bucket(key)
     # optional but useful; return the bucket corresponding to `key`
-    index = insertion_index(key)
+    index = key.hash % num_buckets
     @store[index]
-  end
-end
-
-  def insertion_index(key)
-    key.hash % @store.length
   end
 
   def num_buckets
@@ -76,14 +68,14 @@ end
   end
 
   def resize!
-    temp_array = []
-    @store.each do |link_list|
-      link_list.each{|link| temp_array << [link.key, link.val]}
-    end
-
-    @store = Array.new(@store.length * 2) { LinkedList.new }
     @count = 0
-    temp_array.each do |k, v|
-      self.set(k, v)
+    temp_array = @store
+    @store = Array.new(@store.length * 2) { LinkedList.new }
+
+    temp_array.each do |bucket|
+      bucket.each { |link| set(link.key, link.val) }
     end
+    
   end
+
+end

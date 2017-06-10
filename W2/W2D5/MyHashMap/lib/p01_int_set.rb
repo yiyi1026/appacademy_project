@@ -1,44 +1,51 @@
 class MaxIntSet
   attr_accessor :store
   def initialize(max)
-    @store = Array.new(max,false)
+    @store = Array.new(max, false)
   end
 
   def insert(num)
-    raise "Out of bounds" if num >= @store.length || num < 0
+    validate!(num)
+    return false if @store[num]
     @store[num] = true
   end
 
   def remove(num)
+    validate!(num)
+    return nil unless include?(num)
     @store[num] = false
   end
 
   def include?(num)
+    validate!(num)
     @store[num]
   end
 
   private
 
   def is_valid?(num)
+    (0...store.length).cover?(num)
   end
 
   def validate!(num)
+    raise "Out of bounds" unless is_valid?(num)
   end
 end
 
 
 class IntSet
-  attr_accessor :store
   def initialize(num_buckets = 20)
     @store = Array.new(num_buckets) { Array.new }
   end
 
   def insert(num)
-    index = insertion_index(num)
-    @store[index] << num
+    return false if include?(num)
+    self[num] << num
+    num
   end
 
   def remove(num)
+    return false unless include?(num)
     self[num].delete(num)
   end
 
@@ -50,12 +57,8 @@ class IntSet
 
   def [](num)
     # optional but useful; return the bucket corresponding to `num`
-    index = insertion_index(num)
+    index = num % @store.length
     @store[index]
-  end
-
-  def insertion_index(num)
-    num % @store.length
   end
 
   def num_buckets
@@ -72,19 +75,17 @@ class ResizingIntSet
   end
 
   def insert(num)
-    unless include?(num)
-      if @count == @store.length
-        send(:resize!)
-      end
-      index = insertion_index(num)
-      @store[index] << num
-      @count += 1
-    end
+    return false if include?(num)
+    resize! if @count == num_buckets
+    self[num] << num
+    @count += 1
+    num
   end
 
   def remove(num)
-    x = self[num].delete(num)
-    @count -= 1 if x
+    return false unless include?(num)
+    self[num].delete(num)
+    @count -= 1
   end
 
   def include?(num)
@@ -93,34 +94,20 @@ class ResizingIntSet
 
   private
 
-  def insertion_index(num)
-    num % @store.length
-  end
-
-  def [](num)
-    index = insertion_index(num)
-    @store[index]
-  end
-
-  def resize!
-    temp_array = []
-    @store.each do |subarray|
-      until subarray.empty?
-        temp_array << subarray.pop
-      end
-    end
-
-    @store = Array.new(@store.length * 2) { Array.new }
-    @count = 0
-    temp_array.each do |el|
-      self.insert(el)
-    end
-
-  end
-
   def num_buckets
     @store.length
   end
 
+  def [](num)
+    index = num % num_buckets
+    @store[index]
+  end
+
+  def resize!
+    @count = 0
+    temp_array = @store.flatten
+    @store = Array.new(num_buckets * 2) { Array.new }
+    temp_array.each { |el| insert(el) }
+  end
 
 end
