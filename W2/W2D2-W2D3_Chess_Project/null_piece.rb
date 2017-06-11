@@ -4,8 +4,9 @@ require "singleton"
 class NullPiece < Piece
   include Singleton
 
-  def initialize
+  def initialize(player = nil)
     @pos = nil
+    super
   end
 
 end
