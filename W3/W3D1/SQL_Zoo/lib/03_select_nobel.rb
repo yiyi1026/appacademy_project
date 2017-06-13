@@ -30,6 +30,7 @@ def prizes_from_1950
     nobels
   WHERE
     yr = 1950
+
   SQL
 end
 
@@ -57,18 +58,6 @@ def einstein_prize
   SQL
 end
 
-def nobel_johns
-  # Show the winners with first name John
-  execute(<<-SQL)
-  SELECT
-    winner
-  FROM
-    nobels
-  WHERE
-    winner LIKE 'John%'
-  SQL
-end
-
 def millennial_peace_prizes
   # Give the name of the 'Peace' winners since the year 2000, including 2000.
   execute(<<-SQL)
@@ -77,7 +66,7 @@ def millennial_peace_prizes
   FROM
     nobels
   WHERE
-    yr >= 2000 AND subject = 'Peace'
+    subject = 'Peace' AND yr >= 2000
   SQL
 end
 
@@ -103,6 +92,18 @@ def presidential_prizes
   FROM
     nobels
   WHERE
-    winner IN ('Theodore Roosevelt', 'Woodrow Wilson', 'Jimmy Carter')
+    winner in ('Theodore Roosevelt', 'Woodrow Wilson', 'Jimmy Carter')
+  SQL
+end
+
+def nobel_johns
+  # Show the winners with first name John
+  execute(<<-SQL)
+  SELECT
+    winner
+  FROM
+    nobels
+  WHERE
+    winner LIKE 'John %'
   SQL
 end

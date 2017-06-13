@@ -42,7 +42,6 @@ def films_from_sixty_two
       movies
     WHERE
       yr = 1962
-
   SQL
 end
 
@@ -69,7 +68,8 @@ def trek_films
     movies
   WHERE
     title LIKE '%Star Trek%'
-  ORDER BY yr
+  ORDER BY
+    yr
   SQL
 end
 
@@ -81,7 +81,7 @@ def films_by_id
   FROM
     movies
   WHERE
-    id in (1119, 1595, 1768)
+    id IN (1119, 1595, 1768)
   SQL
 end
 
@@ -132,16 +132,10 @@ def alien_cast
   FROM
     actors
   JOIN
-    castings ON id = actor_id
+    castings ON actors.id= actor_id
+  JOIN
+    movies ON movies.id = movie_id
   WHERE
-    movie_id = (
-      SELECT
-        id
-      FROM
-        movies
-      WHERE
-        title = 'Alien'
-    )
-
+    title = 'Alien'
   SQL
 end

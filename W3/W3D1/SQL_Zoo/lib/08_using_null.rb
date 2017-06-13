@@ -18,7 +18,7 @@ require_relative './sqlzoo.rb'
 def null_dept
   # List the teachers who have NULL for their department.
   execute(<<-SQL)
-  SELECT DISTINCT
+  SELECT
     name
   FROM
     teachers
@@ -36,7 +36,7 @@ def all_teachers_join
   FROM
     teachers
   LEFT OUTER JOIN
-    depts ON dept_id = depts.id
+    depts ON teachers.dept_id = depts.id
   SQL
 end
 
@@ -50,7 +50,7 @@ def all_depts_join
   FROM
     depts
   LEFT OUTER JOIN
-    teachers ON dept_id = depts.id
+    teachers ON teachers.dept_id = depts.id
   SQL
 end
 
@@ -60,7 +60,8 @@ def teachers_and_mobiles
   # #number or '07986 444 2266'
   execute(<<-SQL)
   SELECT
-    name, COALESCE(mobile, '07986 444 2266')
+    name,
+    COALESCE(mobile, '07986 444 2266')
   FROM
     teachers
   SQL
@@ -76,7 +77,7 @@ def teachers_and_depts
   FROM
     teachers
   LEFT OUTER JOIN
-    depts on depts.id = dept_id
+    depts ON teachers.dept_id = depts.id
   SQL
 end
 
@@ -86,23 +87,23 @@ def num_teachers_and_mobiles
   # NB: COUNT only counts non-NULL values.
   execute(<<-SQL)
   SELECT
-    count(name), count(mobile)
+    COUNT(name), COUNT(mobile)
   FROM
     teachers
   SQL
 end
 
 def dept_staff_counts
-  # Use COUNT and GROUP BY dept.name to show each department and
+  # Use COUNT and GROUP BY depts.name to show each department and
   # the number of staff. Structure your JOIN to ensure that the
   # Engineering department is listed.
   execute(<<-SQL)
   SELECT
-    depts.name, count(teachers.name)
+    depts.name, count(teachers.id)
   FROM
     depts
   LEFT OUTER JOIN
-    teachers on dept_id = depts.id
+    teachers ON teachers.dept_id = depts.id
   GROUP BY
     depts.name
   SQL
@@ -115,11 +116,10 @@ def teachers_and_divisions
   SELECT
     teachers.name,
     CASE
-    WHEN dept_id = 1 OR dept_id = 2 THEN
-    'Sci'
+    WHEN dept_id in (1, 2) THEN 'Sci'
     ELSE
     'Art'
-    END
+    END AS dept_name
   FROM
     teachers
   SQL
@@ -132,14 +132,12 @@ def teachers_and_divisions_two
   execute(<<-SQL)
   SELECT
     teachers.name,
-    CASE
-    WHEN dept_id = 1 OR dept_id = 2 THEN
-    'Sci'
-    WHEN dept_id = 3 THEN
-    'Art'
+    (CASE
+    WHEN dept_id in (1, 2) THEN 'Sci'
+    WHEN dept_id = 3 THEN 'Art'
     ELSE
-    'None'
-    END
+      'None'
+    END) AS dept_name
   FROM
     teachers
   SQL
