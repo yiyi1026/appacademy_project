@@ -1,7 +1,6 @@
 require 'singleton'
 require 'sqlite3'
 
-
 class QuestionsDatabase < SQLite3::Database
   include Singleton
 
@@ -13,10 +12,57 @@ class QuestionsDatabase < SQLite3::Database
 
 end #of class
 
-class User
+class ModelBase
+
+  attr_reader :table
+
+  def initialize(options)
+
+  end
+
+  def find_by_id(id)
+    obj = QuestionsDatabase.instance.execute(<<-SQL, id)
+      SELECT
+        *
+      FROM
+        #{table}
+      WHERE
+        id = ?
+    SQL
+    return nil unless obj.length > 0
+
+    User.new(user.first) # play is stored in an array!
+  end
+
+end
+
+class User < QuestionsDatabase
 
   attr_accessor :fname, :lname
   attr_reader :id
+
+  def save
+    if id.nil?
+      # insert
+      QuestionsDatabase.instance.execute(<<-SQL,@fname,@lname)
+        INSERT INTO
+          users(fname, lname)
+        VALUES
+          (?, ?)
+      SQL
+      @id = QuestionsDatabase.instance.last_insert_row_id
+    else
+      # update
+      QuestionsDatabase.instance.execute(<<-SQL,@fname,@lname,@id)
+        UPDATE users
+        SET
+          fname = ? , lname = ?
+        WHERE
+          id = ?
+      SQL
+    end
+    self
+  end
 
   def self.all
     data = QuestionsDatabase.instance.execute(<<-SQL)
@@ -26,20 +72,6 @@ class User
        users
     SQL
     data.map { |datum| User.new(datum) }
-  end
-
-  def self.find_by_id(id)
-    user = QuestionsDatabase.instance.execute(<<-SQL, id)
-      SELECT
-        *
-      FROM
-        users
-      WHERE
-        id = ?
-    SQL
-    return nil unless user.length > 0
-
-    User.new(user.first) # play is stored in an array!
   end
 
   def self.find_by_name(fname, lname)
@@ -60,6 +92,7 @@ class User
     @id = options['id']
     @fname = options['fname']
     @lname = options['lname']
+    @table = 'users'
   end
 
   def authored_questions
