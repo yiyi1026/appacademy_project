@@ -24,7 +24,7 @@ class Route < ActiveRecord::Base
   def better_drivers_query
     # TODO: your code here
     buses = self.buses.includes(:drivers)
-    p buses
+
     all_drivers = {}
     buses.each do |bus|
       drivers = []
