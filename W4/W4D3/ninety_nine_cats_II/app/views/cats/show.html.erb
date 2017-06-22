@@ -1,0 +1,58 @@
+<style>
+table, td, th {
+    border: 1px solid black;
+    padding: 10px;
+    max-width: 600px;
+}
+
+table {
+    border-collapse: collapse;
+    /*width: 100%;*/
+
+
+}
+
+th {
+    height: 50px;
+    text-align: left;
+
+}
+</style>
+
+<h1><%= @cat.name %></h1>
+
+<table>
+  <tr>
+    <th>Attribute</th>
+    <th>Value</th>
+  </tr>
+  <% [:age, :birth_date, :color, :sex, :description].each do |attr_name| %>
+    <tr>
+      <td><%= attr_name %></td>
+      <td><%= @cat.send(attr_name) %></td>
+    </tr>
+  <% end %>
+</table>
+<br />
+<% if current_user.id == @cat.user_id %>
+<%= link_to "Edit #{@cat.name}", edit_cat_url(@cat) %>
+<% else %>
+<%= link_to "Rent this cat", new_cat_rental_request_url(@cat) %>
+<% end %>
+
+<p>
+<%= link_to "Back to See All of Our Cats", cats_url  %>
+</p>
+<h2>Rental Requests</h2>
+<table>
+  <tr>
+    <th>Start Date</th>
+    <th>End Date</th>
+    <th>Status</th>
+    <th>Request Maker</th>
+  </tr>
+  <% @cat.rental_requests.order("start_date").each do |req| %>
+    <%= render "req_tr", req: req %>
+  <% end %>
+
+</table>
