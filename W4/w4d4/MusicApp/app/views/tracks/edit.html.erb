@@ -1,0 +1,12 @@
+<h2>Edit Track</h2>
+<form action="<%=track(@track)%>" method="post">
+  <%= auth_token %>
+  <br>
+  <input type="hidden" name="_method" value="patch">
+  <label>Track Name
+    <input type="text" name="track[track_name]" value="<%=@track.track_name%>">
+  </label>
+  <br>
+  <input type="submit" value="update track">
+
+</form>

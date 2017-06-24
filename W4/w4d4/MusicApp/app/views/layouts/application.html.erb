@@ -12,16 +12,18 @@
     <%= auth_token %>
     <br>
     <% if logged_in? %>
-      <%= user_url(current_user) %>
-      <%= button_to "sign-out", session_url, method: "delete"%>
-    <% else %>
+    <%= user_url(current_user) %>
+    <%= button_to "sign-out", session_url, method: "delete"%>
+  <% else %>
     <%= link_to "sign-in", new_session_url %>
-      <%= link_to "sign-up", new_user_url %>
+    <%= link_to "sign-up", new_user_url %>
+    <% end %>
+    <% if flash[:errors] %>
+    <%= flash[:errors] %>
     <% end %>
 
     <%= yield %>
 
-
-    </form>
-  </body>
+  </form>
+</body>
 </html>
