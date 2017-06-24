@@ -1,0 +1,13 @@
+<h2>Bands</h2>
+
+
+  <label>Band Name
+    <ul>
+      <% @bands.each do |band| %>
+        <li>
+        <%= band.name %>
+        <%= button_to "Delete the band", band_url(band), method: :delete%>
+        </li>
+      <% end %>
+    </ul>
+  </label>

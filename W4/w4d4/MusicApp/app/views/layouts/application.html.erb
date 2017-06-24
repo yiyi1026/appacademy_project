@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>MusicApp</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= javascript_include_tag 'application' %>
+  </head>
+
+  <body>
+    <%= auth_token %>
+    <br>
+    <% if logged_in? %>
+      <%= user_url(current_user) %>
+      <%= button_to "sign-out", session_url, method: "delete"%>
+    <% else %>
+    <%= link_to "sign-in", new_session_url %>
+      <%= link_to "sign-up", new_user_url %>
+    <% end %>
+
+    <%= yield %>
+
+
+    </form>
+  </body>
+</html>
