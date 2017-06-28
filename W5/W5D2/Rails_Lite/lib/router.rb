@@ -14,9 +14,10 @@ class Route
   # use pattern to pull out route params (save for later?)
   # instantiate controller and call controller action
   def run(req, res)
-
-    # controller_class.new(req, res)
-
+    match_data = @pattern.match(req.path)
+    route_params = Hash[match_data.names.zip(match_data.captures)]
+    
+    @controller_class.new(req, res, route_params).invoke_action(action_name)
   end
 end
 
@@ -35,6 +36,7 @@ class Router
   # evaluate the proc in the context of the instance
   # for syntactic sugar :)
   def draw(&proc)
+    instance_eval(&proc)
   end
 
   # make each of these methods that
@@ -46,7 +48,7 @@ class Router
 
   end
 
-  # should return the route that matches this request
+  # should return the first route that matches this request
   def match(req)
     @routes.find{|route|route.matches?(req)}
   end

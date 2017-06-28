@@ -12,6 +12,7 @@ class ControllerBase
     @req, @res = req, res
     @already_built_response = false
     # @params = route_params.merge(req.params) #?????
+    @params = route_params
     # @@protect_from_forgery ||= false
   end
 
@@ -23,7 +24,7 @@ class ControllerBase
   # Set the response status code and header
   def redirect_to(url)
     raise "double render error" if already_built_response?
-    @res['location'] = url
+    @res['Location'] = url
     @res.status = 302
     @already_built_response = true
     session.store_session(@res)
@@ -75,7 +76,7 @@ class ControllerBase
     self.send(name)
 
     if already_built_response?
-      @already_built_response = true
+      # @already_built_response = true
     else
 
       render(name)
