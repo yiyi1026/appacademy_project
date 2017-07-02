@@ -1,12 +1,9 @@
 <!-- W4D1 HTML Intro Exercise -->
 <!DOCTYPE html>
 <style>
-  #aAlogo {
+  footer #aAlogo {
     width: 50px;
   }
-  /** {
-    font-family: monospace, cursive;
-  }*/
 </style>
 <html>
 
@@ -45,7 +42,7 @@
         <li><a href="#ingredients">Ingredients</a></li>
         <li><a href="#direction">Direction</a></li>
       </ul>
-    </nav>
+      </`nav`>
   </header>
   <aside>
     <h2 id="ingredients">Ingredients</h2>
@@ -97,26 +94,19 @@
         Turn off the heat and serve.
       </li>
     </ol>
-  </section>
-
   <!-- w4d2 HTML Form Exercise -->
   <section id='reviews'>
     <h2>Reviews</h2>
     <form id='review-form'action="/reviews" method="post">
-      <br>
       <label for="name">Name</label>
       <input id='name' type="text" name="name" >
-      <br>
-
-      <label for="rating">Rating</label>
+      <label for="rating"></label>
       1<input type="radio" name="rating" id="Rating1" value="1" checked>
       2<input type="radio" name="rating" id="Rating2" value="2">
       3<input type="radio" name="rating" id="Rating3" value="3">
       4<input type="radio" name="rating" id="Rating4" value="4">
       5<input type="radio" name="rating" id="Rating5" value="5">
 
-
-      <br>
       <label for="expertise">Cooking Experience</label>
 
       <select  name="expertise" id="expertise" value="1">
@@ -127,13 +117,12 @@
       <option value="Professional Chef">Professional Chef</option>
       </select>
 
-      <br>
-      <label>Review<textarea name="Review" ></textarea></label>
-      <br>
+      <label><textarea id='review' name="Review" cols='30' rows='10' ></textarea></label>
 
       <input type="submit"  value="Submit Review">
 
     </form>
+  </section>
   </section>
 
 

@@ -1,77 +1,114 @@
-/*html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed,
-figure, figcaption, footer, header, hgroup,
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  font-size: 100%;
-  font: monospace;
-  vertical-align: baseline;
-}
-/* HTML5 display-role reset for older browsers */
-/*article, aside, details, figcaption, figure,
-footer, header, hgroup, menu, nav, section {
-  display: block;
-}
 body {
-  line-height: 1.5;
-}
-ol, ul {
-  list-style: none;
-}
-blockquote, q {
-  quotes: none;
-}
-blockquote:before, blockquote:after,
-q:before, q:after {
-  content: '';
-  content: none;
-}
-table {
-  border-collapse: collapse;
-  border-spacing: 0;
-}*/
-body {
-    font-family: Arial, sans-serif;
-    background-color: #ded7fa;
+  font-family: "Comic Sans MS", monospace, sans-serif;
+  background-color: #ded7fa;
+  width: 900px;   /* 4 */
+  margin: 0px;
 }
 
 h1 {
-    font-size: 38px;
+  font-size: 38px;
 }
 
 h2 {
-    font-size: 32px;
+  font-size: 32px;
 }
 
 .ingredients-list {
-    list-style: square inside;
+  list-style: square inside;
 }
 
 ol {
-    list-style: circle inside;
+  list-style: circle inside;
 }
+
+input[type='radio'] {
+  -webkit-appearance: none;  /*what does this mean??*/
+  background-image: url(../assets/stars.png);
+  width: 27px;
+  height: 27px;
+  vertical-align: bottom;
+}
+
+input:last-child {
+  background-color: #9591C4;
+}
+
+input[type="radio"]:checked {
+  background-position: 30px 30px;
+}
+
+input:last-child:hover{
+  -webkit-filter: brightness(80%);
+}
+
+ol li:nth-of-type(2n) {
+  background-color: #C5C2EF;
+  margin: 10px 0px;
+}
+
+h2 + .user_review {
+  border-top: 1px solid black;
+}
+
 
 img#aAlogo {
-    width: 100px;
+  width: 100px;
+  /*display: inline-block;*/
 }
 
-ul li a{
-    color:inherit;
-    text-decoration: none;
+ul li a, figcaption a{
+  text-decoration: none;
+  color:inherit;
+  /*display: block;*/
+}
+
+/*css display exercises*/
+nav {
+  display: inline-block;
+}
+
+nav ul li {
+  display: inline-block;
+  font-size: 20px;
+}
+
+nav ul li a{
+  padding: 20px;
+  /*display: block;*/
+}
+
+
+section{
+  width: 700px;
+  display: inline-block;
+  vertical-align: top;
+}
+
+aside{
+  width: 180px;
+  margin-right: 15px;
+  display: inline-block;
 
 }
 
-header > img {
-    width: 100px;
+.ingredients-list li{
+  margin: 15px 0px;
+}
+
+input[type='text'], select{
+  display: block;
+  width: 175px;
+}
+
+select{
+  margin: 10px 0px;
+  width: 180px;
+}
+
+textarea{
+  width: 350px;
+}
+
+label{
+  display: block;
 }
