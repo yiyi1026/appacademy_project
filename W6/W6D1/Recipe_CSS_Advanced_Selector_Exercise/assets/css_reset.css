@@ -1,8 +1,8 @@
 body {
   font-family: "Comic Sans MS", monospace, sans-serif;
   background-color: #ded7fa;
-  width: 900px;   /* 4 */
-  margin: 0px;
+  width: 900px;
+  margin: 0 auto;
 }
 
 h1 {
@@ -11,6 +11,16 @@ h1 {
 
 h2 {
   font-size: 32px;
+}
+
+ul li a, figcaption a{
+  text-decoration: none;
+  color:inherit;
+  /*display: block;*/
+}
+img#aAlogo {
+  width: 100px;
+  /*display: inline-block;*/
 }
 
 .ingredients-list {
@@ -22,7 +32,7 @@ ol {
 }
 
 input[type='radio'] {
-  -webkit-appearance: none;  /*what does this mean??*/
+  -webkit-appearance: none;
   background-image: url(../assets/stars.png);
   width: 27px;
   height: 27px;
@@ -51,20 +61,12 @@ h2 + .user_review {
 }
 
 
-img#aAlogo {
-  width: 100px;
-  /*display: inline-block;*/
-}
 
-ul li a, figcaption a{
-  text-decoration: none;
-  color:inherit;
-  /*display: block;*/
-}
 
 /*css display exercises*/
 nav {
-  display: inline-block;
+  /*display: inline-block;*/
+  float: right;
 }
 
 nav ul li {
@@ -74,7 +76,7 @@ nav ul li {
 
 nav ul li a{
   padding: 20px;
-  /*display: block;*/
+  display: block;
 }
 
 
