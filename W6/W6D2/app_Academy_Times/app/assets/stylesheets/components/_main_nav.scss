@@ -1,10 +1,12 @@
 .main-nav {
-
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px;
 }
 
 .left-nav > ul,
 .right-nav > ul {
-
+  
 }
 
 .left-nav > ul > li {

@@ -6,11 +6,14 @@ html {
 }
 
 body {
-	// ...
+	width: 80%;
+	margin: 0 auto;
+	font-family: $serif;
+	font-size: 12px;
 }
 
 button {
-	// background-color:
+	background-color: $blue;
 	// border-color:
 	// color:
 	// font-weight:
@@ -24,14 +27,19 @@ button {
 }
 
 button:hover {
-	// background-color:
-	// border-color:
+	background-color: $blue;      //subscribe and log in
+	border-color: $dark-blue;
 }
 
-/*
-	Header Rules
-*/
+button:hover {
+	background-color: $light-gray;      //sections search and gear
+	// border-color: $darker-blue;
+}
 
+// header link{
+// 	text-decoration: underline;
+// 	// text-decoration-color: $black;
+// }
 hr {
 	border: 0;
 	height: 1px;
