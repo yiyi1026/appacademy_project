@@ -1,0 +1,9 @@
+class View{
+  constructor(){
+
+  }
+
+  setupTowers(){
+    
+  }
+}

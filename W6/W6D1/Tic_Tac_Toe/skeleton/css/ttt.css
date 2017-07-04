@@ -1,0 +1,39 @@
+figure.ttt, ul, li{
+  -webkit-padding-start: 0px;
+   padding:0;
+   font-size:100%;
+   line-height:1; }
+
+
+figure.ttt ul{
+  margin:0px 0px 0px 20px;
+  height: 300px;
+  width: 300px;
+  background-color: grey;
+  border: 5px solid black;
+  align-content: center;
+}
+
+h1{
+  margin-left: 135px;
+}
+
+li.white{
+  background-color: white;
+  font-size: 90px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+li {
+  list-style-type: none;
+  float: left;
+  width: 90px;
+  height: 90px;
+  border: 5px solid black;
+  flex-wrap: wrap;
+}
+
+li:hover{
+  background-color: yellow;
+}
