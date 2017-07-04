@@ -1,0 +1,117 @@
+body {
+  font-family: "Comic Sans MS", monospace, sans-serif;
+  background-color: #ded7fa;
+  width: 900px;
+  margin: 0 auto;
+}
+
+h1 {
+  font-size: 38px;
+  margin-bottom: 10px;
+}
+
+h2 {
+  font-size: 32px;
+}
+
+ul li a, figcaption a{
+  text-decoration: none;
+  color:inherit;
+  /*display: block;*/
+}
+img#aAlogo {
+  width: 100px;
+  float: left;
+  /*display: inline-block;*/
+}
+
+.ingredients-list {
+  list-style: square inside;
+}
+
+ol {
+  list-style: circle inside;
+}
+
+input[type='radio'] {
+  -webkit-appearance: none;
+  width: 27px;
+  height: 27px;
+  background-image: url(../assets/stars.png);
+  vertical-align: bottom;
+}
+
+input[type="radio"]:checked {
+  background-position: 30px 30px;
+}
+
+input[type='submit']:last-child {
+  background-color: #9591C4;
+}
+
+
+input:last-child:hover{
+  -webkit-filter: brightness(80%);
+}
+
+ol li:nth-of-type(2n) {
+  background-color: #C5C2EF;
+  margin: 10px 0px;
+}
+
+h2 + .user_review {
+  border-top: 1px solid black;
+}
+
+
+/*css display exercises*/
+nav {
+  /*display: inline-block;*/
+  float: right;
+}
+
+nav ul li {
+  display: inline-block;
+  font-size: 20px;
+}
+
+nav ul li a{
+  padding: 20px;
+  display: block;
+}
+
+
+/*section{*/
+  /*width: 700px;
+  display: inline-block;
+  vertical-align: top;*/
+/*}*/
+
+aside{
+  /*width: 180px;
+  margin-right: 15px;*/
+  display: inline-block;
+
+}
+
+.ingredients-list li{
+  margin: 15px 0px;
+}
+
+input[type='text'], select{
+  display: block;
+  width: 175px;
+}
+
+select{
+  margin: 10px 0;
+  width: 180px;
+}
+
+textarea{
+  width: 350px;
+}
+
+label{
+  display: block;
+}
