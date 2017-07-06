@@ -1,36 +1,48 @@
 .main-nav {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   padding: 10px;
+  border-bottom: 1px solid $light-gray;
 }
 
 .left-nav > ul,
 .right-nav > ul {
-  
+  // flex: 1;
+  display:flex;
+  align-items: center;
 }
 
 .left-nav > ul > li {
-
+  font-size: 20px;
+  font-family: $sans-serif;
+  text-transform:uppercase;
+  margin: 3px;
 }
 
 .right-nav > ul > li {
-
+  // font-size: 20px;
+  font-family: $sans-serif;
+  margin: 3px;
+  // cursor: pointer;
 }
 
 .right-nav > ul > li:last-of-type {
+  // font-size: 20px;
+
 
 }
 
 .left-nav > ul > li:hover,
 .right-nav > ul > li:last-of-type:hover {
+  background-color: $lightest-gray;
 
 }
 
-.left-nav span {
-
+.left-nav span{
+  // margin???
 }
 
 
 .right-nav i {
-
+  // transform:
 }
