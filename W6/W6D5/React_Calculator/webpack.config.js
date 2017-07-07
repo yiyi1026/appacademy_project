@@ -2,16 +2,20 @@ let path = require('path');
 
 module.exports = {
   context: __dirname,
-  entry: "./index.jsx",
+  entry: "./app.jsx",
   output: {
     path: path.resolve(__dirname),
-    filename: "./bundle.js",
+    filename: "bundle.js",
+  },
+  devtool: 'source-maps',
+  resolve: {
+    extensions: ['.js', '.jsx', '*']
   },
   module:{
     loaders: [
       {
-        test: [/\.jsx?$/], // Specifies file types to transpile
-        exclude: /(node_modules)/, // Leaves dependencies alone
+        test: [/\.jsx?$/, /\.js?$/], // Specifies file types to transpile
+        exclude: /node_modules/, // Leaves dependencies alone
         loader: 'babel-loader', // Sets Babel as the transpiler
         query: {
           presets: ['es2015', 'react'] // Tells Babel what syntaxes to translate
@@ -19,8 +23,7 @@ module.exports = {
       }
     ]
   },
-  devtool: 'source-maps',
-  resolve: {
-    extensions: ['.js', '.jsx', '*']
-  }
+  // resolveLoader: {
+  //   path.resolve(__dirname, '../node_modules')
+  // }
 };
