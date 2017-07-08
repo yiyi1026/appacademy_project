@@ -10,10 +10,12 @@ class Autocomplete extends React.Component {
 
   render(){
     return (
-      <ul>
-      <input type="text" name="" value=""/>
-        <li></li>
-      </ul>
+      <div className='autocomplete'>
+        <ul>
+          <input type="text" name="" value=""/>
+          <li></li>
+        </ul>
+      </div>
     );
   }
 }
