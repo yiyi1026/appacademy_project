@@ -1,4 +1,5 @@
 import React from 'react';
+
 class Clock extends React.Component{
   constructor() {
     super();
@@ -9,7 +10,6 @@ class Clock extends React.Component{
       date: time.toDateString()
     };
     this.tick = this.tick.bind(this);
-    // this.intervalId = "";
 
   }
 
@@ -34,13 +34,13 @@ class Clock extends React.Component{
 
     return(
       <div className="clock">
-        <ul>
-          <li className="date">Date:</li>
+        <ul className='clock'>
           <li className="date">Time:</li>
+          <li className="date">Date:</li>
         </ul>
         <ul>
-          <li className="date_value">{this.state.date}</li>
           <li className="date_value">{this.state.hour}</li>
+          <li className="date_value">{this.state.date}</li>
         </ul>
 
       </div>
