@@ -8,12 +8,21 @@ class Autocomplete extends React.Component {
     }
   }
 
+  handleinput(str){
+
+  }
+
+  linkState(key){
+
+    return (event =>handleinput(event));
+  }
+
   render(){
     return (
       <div className='autocomplete'>
+        <input onChange={this.linkState('inputVal')} value = {this.state.word}/>
         <ul>
-          <input type="text" name="" value=""/>
-          <li></li>
+          <li>whatever</li>
         </ul>
       </div>
     );

@@ -39,7 +39,7 @@ class Weather extends React.Component{
         // Success!
         // console.log('Success');
         let resp = JSON.parse(request.responseText);
-        let weather = resp.main.temp;
+        let weather = resp.main.temp + ' degrees';
         let name = resp.name;
         // console.log(weather);
         // console.log(name);
@@ -64,13 +64,16 @@ class Weather extends React.Component{
 
   render(){
     return (
-      <div className="weather">
-        <ul className='weather'>
-          <li className='weatherlocation'>{this.state.name}</li>
-          <li className='weather_value'>{this.state.weather}</li>
-        </ul>
+      <div>
+        <h2>Weather</h2>
+        <div className="weather">
+          <ul className='weather'>
+            <li className='weatherlocation'>{this.state.name}</li>
+            <li className='weather_value'>{this.state.weather}</li>
+          </ul>
 
 
+        </div>
       </div>
 
     );

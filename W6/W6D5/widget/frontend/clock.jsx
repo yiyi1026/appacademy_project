@@ -33,16 +33,18 @@ class Clock extends React.Component{
   render(){
 
     return(
-      <div className="clock">
-        <ul className='clock'>
-          <li className="date">Time:</li>
-          <li className="date">Date:</li>
-        </ul>
-        <ul>
-          <li className="date_value">{this.state.hour}</li>
-          <li className="date_value">{this.state.date}</li>
-        </ul>
-
+      <div>
+        <h2>Clock</h2>
+        <div className="clock">
+          <ul className='clock'>
+            <li className="date">Time:</li>
+            <li className="date">Date:</li>
+          </ul>
+          <ul className="clock">
+            <li className="date_value">{this.state.hour}</li>
+            <li className="date_value">{this.state.date}</li>
+          </ul>
+        </div>
       </div>
     );
   }

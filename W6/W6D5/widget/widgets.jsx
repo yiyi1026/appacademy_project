@@ -17,6 +17,7 @@ class Root extends React.Component {
   render() {
     return(<div>
       <Clock/>
+      <br/>
       <Weather/>
       <Autocomplete names={Names}/>
 

@@ -22,6 +22,12 @@ body {
   width: auto;
 }
 
+h2{
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bold;
+  /*color: white;*/
+}
+
 /* Clock*/
 div.clock {
   display: flex;
@@ -40,7 +46,7 @@ div.weather {
   display: flex;
   justify-content: center;
   width: 400px;
-  height: 150px;
+  height: 100px;
   background-color: rgb(208,99,203);
   -webkit-box-align: center;
   -webkit-align-items: center;
@@ -50,7 +56,11 @@ div.weather {
 
 div.clock ul {
   font-family: 'Montserrat', sans-serif;
+  font-weight: bold;
   color: white;
+  /*align-content: space-around;*/
+  /*display: inline-flex;*/
+  /*justify-content: flex-end;*/
   list-style: none;
   font-size: 24px;
   padding: 10px;
@@ -58,6 +68,7 @@ div.clock ul {
 
 div.weather ul {
   font-family: 'Montserrat', sans-serif;
+  /*font-weight: bold;*/
   color: white;
   list-style: none;
   font-size: 24px;
@@ -66,17 +77,24 @@ div.weather ul {
   -webkit-align-items: center;*/
 }
 
-li.location{
+/*li.location{
   padding: 15px;
-}
+}*/
 
-li.weather_value{
+/*li.weather_value{
   padding: : 15px;
+}*/
+
+ul.weather li{
+  padding: 10px;
 }
 
 li.date {
+  padding: 10px;
+
 }
 
 li.date_value {
   /*justify-content: flex-end;*/
+  padding: 10px;
 }
