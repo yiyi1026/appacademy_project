@@ -1,0 +1,61 @@
+html, body, header, nav, h1, li, li, main, button{
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font: sans-serif;
+  color: inherit;
+  text-align: inherit;
+  text-decoration: inherit;
+  vertical-align: inherit;
+  box-sizing: inherit;
+  background: transparent;
+  list-style: none;
+
+}
+
+
+body {
+  padding-top: 20px;
+  display: flex;
+  justify-content: center;
+  width: auto;
+}
+
+/* Clock*/
+div.clock {
+  display: flex;
+  justify-content: space-between;
+  width: 400px;
+  height: 100px;
+  background-color: grey;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  border: 2px solid black;
+  padding: 10px;
+
+}
+
+div.weather {
+  font-size: 30px;
+  display: flex;
+  padding: 10px;
+  width: 400px;
+  height: 100px;
+  justify-content: center;
+  border: 2px black solid;
+}
+
+div.clock ul {
+  font-family: 'Montserrat', sans-serif;
+  color: white;
+  list-style: none;
+  font-size: 24px;
+  padding: 10px;
+}
+
+li.date {
+}
+
+li.date_value {
+}
