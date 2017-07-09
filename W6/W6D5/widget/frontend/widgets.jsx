@@ -1,9 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import Clock from './frontend/clock.jsx';
-import Weather from './frontend/weather.jsx';
-import Autocomplete from './frontend/autocomplete.jsx';
+import Clock from './clock.jsx';
+import Weather from './weather.jsx';
+import Autocomplete from './autocomplete.jsx';
+import Tabs from './tabs.jsx'
 
 const Names = [
   'Hui',
@@ -22,7 +23,7 @@ class Root extends React.Component {
       <br/>
       <Weather placeholder="loading weather..."/>
       <Autocomplete names={Names} />
-
+      <Tabs />
     </div>);
 
 
