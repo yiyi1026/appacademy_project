@@ -8,7 +8,6 @@ class Weather extends React.Component{
       name: ''
     };
     this.pollWeather = this.pollWeather.bind(this);
-    // this.setState = this.setState.bind(this);
 
   }
 
@@ -16,7 +15,6 @@ class Weather extends React.Component{
     navigator.geolocation.getCurrentPosition(this.pollWeather);
   }
 
-//'http://api.openweathermap.org/data/2.5/forecast?id=524901&APPID=2c66eb52f8e257c68e00ce93cebd55b'
   pollWeather(pos){
     let crd = pos.coords;
     let latitude = crd.latitude;
@@ -26,7 +24,7 @@ class Weather extends React.Component{
     let thirdurl = '&&APPID=';
     const apikey = '35cc88bf712cf18e9eb24f6a7d08c4b9';
     let fahr = '&units=imperial';
-    let url = starturl + latitude + midurl + longitude + fahr+thirdurl+apikey;
+    let url = starturl + latitude + midurl + longitude + fahr + thirdurl + apikey;
     this.request(url);
   }
 
@@ -63,17 +61,30 @@ class Weather extends React.Component{
 
 
   render(){
+    let content = this.state.weather;
+
+    if (this.state.weather){
+      content = <ul>
+        <li className='weatherlocation'>{this.state.name}</li>
+        <li className='weather_value'>{this.state.weather}</li>
+      </ul>;
+    }else{
+
+      content = <ul>
+        <li className='weather_value'>loading weather...</li>
+      </ul>;
+    }
+
     return (
       <div>
-        <h2>Weather</h2>
+        <h1>Weather</h1>
         <div className="weather">
           <ul className='weather'>
-            <li className='weatherlocation'>{this.state.name}</li>
-            <li className='weather_value'>{this.state.weather}</li>
+            {content}
           </ul>
 
-
         </div>
+        <br/>
       </div>
 
     );

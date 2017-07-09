@@ -18,14 +18,14 @@ html, body, header, nav, h1, li, li, div, main, button{
 body {
   padding-top: 20px;
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   width: auto;
 }
 
-h2{
+h1{
   font-family: 'Montserrat', sans-serif;
   font-weight: bold;
-  /*color: white;*/
+  margin-bottom: 15px;
 }
 
 /* Clock*/
@@ -51,16 +51,41 @@ div.weather {
   -webkit-box-align: center;
   -webkit-align-items: center;
   border: 2px solid black;
-  padding: 10px;
+  padding: 15px;
+
+}
+
+div.autocomplete {
+  display: flex;
+  justify-content: center;
+  align-content: flex-start;
+  width: 200px;
+  height: 300px;
+  background-color: rgb(208,99,203);
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  border: 2px solid black;
+  padding: 15px;
+  flex-wrap: wrap;
+
+}
+
+
+div.autocomplete ul li{
+  list-style: initial;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bold;
+  color: white;
+}
+
+div.autocomplete ul li:hover{
+  cursor: pointer;
 }
 
 div.clock ul {
   font-family: 'Montserrat', sans-serif;
   font-weight: bold;
   color: white;
-  /*align-content: space-around;*/
-  /*display: inline-flex;*/
-  /*justify-content: flex-end;*/
   list-style: none;
   font-size: 24px;
   padding: 10px;
@@ -68,13 +93,10 @@ div.clock ul {
 
 div.weather ul {
   font-family: 'Montserrat', sans-serif;
-  /*font-weight: bold;*/
   color: white;
   list-style: none;
   font-size: 24px;
   padding: 10px;
-  /*-webkit-box-align: center;
-  -webkit-align-items: center;*/
 }
 
 /*li.location{
@@ -86,7 +108,7 @@ div.weather ul {
 }*/
 
 ul.weather li{
-  padding: 10px;
+  margin: 10px;
 }
 
 li.date {
@@ -95,6 +117,6 @@ li.date {
 }
 
 li.date_value {
-  /*justify-content: flex-end;*/
+  /*align-content: flex-start;*/
   padding: 10px;
 }

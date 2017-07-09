@@ -9,7 +9,9 @@ const Names = [
   'Hui',
   'Yu',
   'Derek',
-  'Daidai'
+  'Daidai',
+  'Hulu',
+  'Gulu'
 ];
 
 
@@ -18,8 +20,8 @@ class Root extends React.Component {
     return(<div>
       <Clock/>
       <br/>
-      <Weather/>
-      <Autocomplete names={Names}/>
+      <Weather placeholder="loading weather..."/>
+      <Autocomplete names={Names} />
 
     </div>);
 
