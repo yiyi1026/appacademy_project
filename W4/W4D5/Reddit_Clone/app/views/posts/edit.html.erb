@@ -1,0 +1,29 @@
+<h1>Edit Post</h1>
+
+<form action="<%=post_url(@post)%>" method="post">
+  <input type="hidden" name="_method" value="patch">
+  <%= auth %>
+  <label>Title
+    <input type="text" name="post[title]" value="<%=@post.title%>">
+  </label>
+  <br>
+  <label>Url
+    <input type="text" name="post[url]" value="<%=@post.url%>">
+  </label>
+  <br>
+  <label>Content
+    <input type="text" name="post[content]" value="<%=@post.content%>">
+  </label>
+
+  <label>Sub to Post
+    <input type="hidden" name="post[sub_ids][]" value=""> 
+    </label>
+    <% Sub.all.each do |sub_forum| %>
+    <label> <%=sub_forum.title%>
+    <input type="checkbox" name="post[sub_ids][]" value="<%=sub_forum.id%>" <%='checked' if @post.sub_ids.include?(sub_forum.id)%>>
+    </label>
+    <% end %>
+
+
+  <input type="submit" name="" value="Update Post">
+</form>

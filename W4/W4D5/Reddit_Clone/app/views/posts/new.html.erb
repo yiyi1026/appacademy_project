@@ -1,0 +1,30 @@
+<h1>New Post</h1>
+
+<form class="" action="<%=posts_url%>" method="post">
+  <%= auth %>
+  <label>Title
+    <input type="text" name="post[title]" value="">
+  </label>
+  <br>
+  <label>Url
+    <input type="text" name="post[url]" value="">
+  </label>
+  <br>
+  <label>Content
+    <input type="text" name="post[content]" value="">
+  </label>
+
+  <label>Sub to Post
+    <input type="hidden" name="post[sub_ids][]" value="">
+    </label>
+    <% Sub.all.each do |sub_forum| %>
+    <label> <%=sub_forum.title%>
+    <input type="checkbox" name="post[sub_ids][]" value="<%=sub_forum.id%>" <%='checked' if @post.sub_ids.include?(sub_forum.id)%>>
+    </label>
+    <% end %>
+
+
+  <input type="submit" name="" value="Create New Post">
+</form>
+
+<%= link_to "Back to Sub", :back %>

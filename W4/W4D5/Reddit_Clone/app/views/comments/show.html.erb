@@ -1,0 +1,27 @@
+<h1>Comment Show</h1>
+<ul>
+  <li> <%=@comment.content %>
+    <ul>
+      <% @comment.child_comments.each do |child| %>
+    <li><%=link_to child.content, comment_url(child)%></li>
+      <%= render( partial: 'childcomment', locals: { child: child.child_comments }) if child.child_comments %>
+      <% end %>
+    </ul>
+  </li>
+</ul>
+
+
+<h3>Child Comment</h3>
+<form class="" action="<%=comments_url%>" method="post">
+  <%= auth %>
+
+  <input type="hidden" name="comment[post_id]" value="<%=@comment.post.id%>">
+  <input type="hidden" name="comment[parent_comment_id]" value="<%=@comment.id%>">
+  <label>Content
+    <input type="text" name="comment[content]" value="">
+  </label>
+  <br>
+  <input type="submit" name="" value="Add New Comment">
+</form>
+
+<br>

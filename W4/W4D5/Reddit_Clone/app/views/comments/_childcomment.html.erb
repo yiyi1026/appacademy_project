@@ -1,0 +1,11 @@
+<ul>
+  <% whatever = [] %>
+  <% until child.nil? %>
+    <% child.each do |comment| %>
+    <% whatever << comment %>
+  <li><%=link_to comment.content, comment_url(comment)%></li>
+    <% end %>
+    <% child = whatever %>
+
+  <% end %>
+</ul>

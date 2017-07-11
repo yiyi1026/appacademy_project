@@ -1,0 +1,30 @@
+<h1><%=@post.title%> By <%=@post.author.username%></h1>
+
+<label>URL:</label>
+<%=@post.url%>
+<br>
+<label>Content:</label>
+<%=@post.content%>
+<br>
+<%= link_to "Edit Post", edit_post_url(@post) %>
+<br>
+<br>
+<label>Subs</label>
+<br>
+<ul>
+<% @post.subs.each do |sub_forum| %>
+  <li><%= link_to sub_forum.title, sub_url(sub_forum)%></li>
+<% end %>
+</ul>
+
+
+<br>
+<%@post.comments.where(parent_comment_id:nil).each do |top_comment|  %>
+  <%= link_to top_comment.content, comment_url(top_comment.id)%>
+
+<% end %>
+<br>
+<br>
+<label>Comments</label>
+<br>
+<br>

@@ -1,0 +1,7 @@
+<h1>All Subs</h1>
+
+<ul>
+  <% @subs.each do |sub_forum| %>
+  <li><%= link_to sub_forum.title, sub_url(sub_forum) %></li>
+    <% end %>
+</ul>
