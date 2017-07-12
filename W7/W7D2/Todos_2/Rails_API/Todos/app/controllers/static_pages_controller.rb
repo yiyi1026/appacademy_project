@@ -1,5 +1,4 @@
 class StaticPagesController < ApplicationController
-  def show
-    render root
+  def root
   end
 end
