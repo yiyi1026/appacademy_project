@@ -1,3 +1,3 @@
-export const allTodos = (state) => (
-  Object.keys(state.todos).map((todoID) => state.todos[todoID])
+export const allTodos = ({todos}) => (
+  Object.keys(todos).map((todoID) => todos[todoID])
 );

@@ -1,28 +1,46 @@
 import React from 'react';
+import merge from 'lodash/merge';
+
 
 
 class TodoListItem extends React.Component {
   constructor(props) {
     super(props);
+    // console.log(props);
     this.handleDelete = this.handleDelete.bind(this);
+    // this.toggleTodo = this.toggleTodo.bind(this);
   }
 
+  // toggleTodo(e){
+  //   e.preventDefault();
+  //   const toggledTodo = merge(
+  //     {},
+  //     this.props.todo,
+  //     {done: !this.props.todo.done}
+  //   );
+  //   // this.props.receiveTodo(toggledTodo);
+  // }
 
   handleDelete(event) {
+    // console.log('what');
     event.preventDefault();
-    this.props.removeTodo(this.props.todo);
+    // removeTodo
+    let id = this.props.todo.id;
+    this.props.removeTodo(id);
   }
 
   render() {
-
-    const { todo, removeTodo } = this.props;
-    console.log(this.props);
+    const { todo, removeTodo } = this.props; //where does this updateTodo come from
+    console.log(removeTodo);
     return (
-
-      <li>
-        {this.props.todo.title}
-        <button onClick={ this.handleDelete }>Delete ME</button>
-      </li>
+      <li className='todo-list-item'>
+      <div>
+          {this.props.todo.title}
+          <button key={this.props.todo.id} onSubmit={this.handleDelete}>
+            Delete this item
+          </button>
+      </div>
+    </li>
     );
   }
 }

@@ -3,8 +3,8 @@ import { uniqueId } from '../../utils/idGenerator';
 import merge from 'lodash/merge';
 
 class TodoForm extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       title: '',
       body: '',
@@ -13,8 +13,8 @@ class TodoForm extends React.Component {
     this.submitForm = this.submitForm.bind(this);
   }
 
-  update(key) {
-    return (event => this.setState({[key]: event.currentTarget.value}));
+  update(property) {
+    return (event => this.setState({[property]: event.target.value}));
   }
 
   submitForm(event) {
@@ -24,7 +24,7 @@ class TodoForm extends React.Component {
     this.setState({
       title: "",
       body: ""
-    });
+    });  //reset the form
   }
 
   render () {
@@ -32,17 +32,28 @@ class TodoForm extends React.Component {
       <form onSubmit={this.submitForm}>
         <label>Title:
           <br/>
-          <input type="text" onChange={this.update('title')} value={this.state.title}/>
+          <input
+            ref='title'
+            onChange={this.update('title')}
+            value={this.state.title}
+            placeholder="buy milk"
+            required/>
         </label>
           <br/>
         <label>Body:
           <br/>
-          <textarea onChange={this.update('body')} value={this.state.body} rows="8" cols="80"></textarea>
+          <textarea
+            onChange={this.update('body')}
+            value={this.state.body}
+            rows="8"
+            cols="80"
+            placeholder="2% or whatever is on sale!"
+            required></textarea>
         </label>
-        <button>Submit</button>
+        <button>Create Todo!</button>
       </form>
     );
   }
-}
+};
 
 export default TodoForm;
