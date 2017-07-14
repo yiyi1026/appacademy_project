@@ -1,44 +1,41 @@
-// renders the search bar and handles all of the search logic and trigger
-// the ajax request renders the GiphysIndex.
 import React from 'react';
 
 import GiphysIndex from './giphys_index';
 
 class GiphysSearch extends React.Component {
   constructor(props){
-  	super(props);
-  	this.state = { searchTerm: 'corgi'};
+    super(props);
+    this.state = {
+      searchTerm: 'corgi'
+    }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentDidMount() {
-    // this.props.fetchSearchGiphys('corgi');
-    this.props.fetchSearchGiphys(this.state.searchTerm);
-
+    this.props.fetchSearchGiphys('corgi');
   }
 
   handleChange(e){
-    this.setState({searchTerm: e.currentTarget.value}) //currentTarget, Target???
+    this.setState({searchTerm: e.currentTarget.value})
   }
 
   handleSubmit(e){
     e.preventDefault();
     let searchTerm = this.state.searchTerm.split(" ").join("+");
     this.props.fetchSearchGiphys(searchTerm);
-
   }
 
-  render (){
-    let { giphys } = this.props;
+  render(){
+    let {giphys} = this.props;  //fetch the value to giphys key
 
-    return (
+    return(
       <div>
-        <form className="search-bar">
-          <input value={this.state.searchTerm} onChange={this.handleChange} />
-          <button type="submit" onClick={this.handleSubmit}>Search Giphy</button>
+        <form className='search-bar'>
+          <input value={this.state.searchTerm} onChange={this.handleChange}/>
+          <button type='submit' onClick={this.handleSubmit}>Search Giphy</button>
         </form>
-        <GiphysIndex giphys={giphys} />
+        <GiphysIndex giphys = {giphys} />
       </div>
     );
   }

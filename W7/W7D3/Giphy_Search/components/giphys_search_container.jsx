@@ -2,15 +2,15 @@ import { connect } from 'react-redux';
 import GiphysSearch from './giphys_search';
 import { fetchSearchGiphys } from '../actions/giphy_actions';
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   giphys: state.giphys
-});
+})
 
-const mapDispatchToProps =(dispatch) => {
-  return {fetchSearchGiphys: searchTerm => dispatch(fetchSearchGiphys(searchTerm))};
-};
+const mapDispatchToProps = (dispatch) => (action) => ({
+  fetchSearchGiphys: (searchTerm) => dispatch(fetchSearchGiphys(searchTerm))
+});
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
+  mapDispatchToProps
 )(GiphysSearch);

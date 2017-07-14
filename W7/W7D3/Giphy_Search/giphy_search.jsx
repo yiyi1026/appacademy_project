@@ -2,21 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import configureStore from './store/store';
 import Root from './components/root';
+import * as APIUtil from './util/api_util';
 
-//phase 1
-  //API Util
-import {fetchSearchGiphys} from './util/api_util';
-  //Actions
-import {receiveSearchGiphys} from './actions/giphy_actions';
+import {receiveSearchGiphys, fetchSearchGiphys} from './actions/giphy_actions';
+import RootReducer from './reducers/root_reducer';
 
-document.addEventListener('DOMContentLoaded', () =>{
+document.addEventListener("DOMContentLoaded", () => {
   const store = configureStore();
   window.store = store;
-  ReactDOM.render(<Root store={store}/>, document.getElementById('root'));
-
+  const root = document.getElementById('root');
+  ReactDOM.render(<Root store={store} />, root);
 })
-
-
-//test-only code
-window.fetchSearchGiphys = fetchSearchGiphys;
-window.receiveSearchGiphys = receiveSearchGiphys;

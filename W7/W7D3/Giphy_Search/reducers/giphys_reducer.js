@@ -10,10 +10,4 @@ const GiphysReducer = (state = [], action) => {
 };
 
 export default GiphysReducer;
-
-//state shape
-// {
-//   giphys: [
-//
-//   ]
-// }
+// window.GiphysReducer = GiphysReducer;
