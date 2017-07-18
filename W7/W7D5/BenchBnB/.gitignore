@@ -1,2 +1,4 @@
 node_modules/
 bundle.js*
+tmp/
+tmp/cache/
