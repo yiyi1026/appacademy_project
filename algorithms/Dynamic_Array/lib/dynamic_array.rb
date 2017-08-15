@@ -7,25 +7,25 @@ class DynamicArray
     @store = StaticArray.new(8)
     @length = 0
     @capacity = 8
-    @start_idx = 0
+    # @start_idx = 0
   end
 
   # O(1)
   def [](index)
     check_index(index)
-    @store[(@start_idx + index) % capacity]
+    @store[index% capacity]
   end
 
   # O(1)
   def []=(index, value)
     check_index(index)
-    @store[(@start_idx + index) % capacity] = value
+    @store[index % capacity] = value
   end
 
   # O(1)
   def pop
     check_index(0)
-    last_el = @store[(@start_idx + @length-1) % capacity]
+    last_el = self[@length-1]
     @length -= 1
     last_el
   end
@@ -34,7 +34,7 @@ class DynamicArray
   # resize.
   def push(val)
     resize! if length == capacity
-    @store[(@start_idx + length) % capacity] = val
+    @store[length % capacity] = val
     @length += 1
     self
   end
@@ -42,19 +42,27 @@ class DynamicArray
   # O(n): has to shift over all the elements.
   def shift
     check_index(0)
+    first_el = self[0]
+    (@length-1).times do |i|
+      self[i] = self[i + 1]
+    end
     @length -= 1
-    first_el = @store[@start_idx]
-    @start_idx = (@start_idx + 1)% capacity
+    # @start_idx = (@start_idx + 1)% capacity
     first_el
   end
 
   # O(n): has to shift over all the elements.
   def unshift(val)
-    resize! if length == capacity
-    @start_idx = (@start_idx-1) % capacity
-    @store[@start_idx] = val
+    resize! if length >= capacity
+    new_store = StaticArray.new(capacity)
+    new_store[0] = val
+    length.times do |i|
+      new_store[i + 1] = self[i]
+    end
+    @store = new_store
     @length += 1
-    self
+
+    val
   end
 
   protected

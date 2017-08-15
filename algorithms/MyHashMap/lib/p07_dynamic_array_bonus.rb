@@ -35,23 +35,19 @@ class DynamicArray
   end
 
   def [](i)
-    return nil unless (-count...count).cover?(i)
-    i += count until i >= 0
+    return nil if i < -@count || i >= @count
+    i += @count until i >= 0
+    check_index(i)
     @store[i]
   end
 
   def []=(i, val)
-    if i > count
-      (i + 1 - count).times do
-        push(nil)
-      end
-    elsif i >= -count
-      i += count until i >= 0
-    else
-      return nil
+    if i >= @count
+      (i - @count + 1).times {|_| push(nil) }
+    elsif i > -@count
+      i += @count until i >= 0
     end
     @store[i] = val
-
   end
 
   def capacity
@@ -59,46 +55,46 @@ class DynamicArray
   end
 
   def include?(val)
-    each do |el|
-      return true if val == el
-    end
+    each {|el| return true if val == el}
     false
   end
 
   def push(val)
-    resize! until capacity > count
-    self[count] = val
+    resize! if @count == capacity
+    @store[@count] = val
     @count += 1
+    # p self
+    self
   end
 
   def unshift(val)
-    resize! if count >= capacity
-    new_store = StaticArray.new(capacity)
+    resize! if @count == capacity
+    new_store = StaticArray.new(capacity+1)
     new_store[0] = val
-    count.times do |i|
+    for i in (0...capacity)
       new_store[i + 1] = self[i]
     end
-    @store = new_store
     @count += 1
-
-    val
+    @store = new_store
+    self
   end
 
   def pop
-    if @count > 0
-      val = self[count-1]
-      @count -= 1
-      val
-    end
+    last_el = last
+    @count -= 1
+    last_el
   end
 
   def shift
-    val = self[0]
-    (@count-1).times do |i|
-      self[i] = self[i + 1]
+    return nil if @count == 0
+    first_el = self.first
+    new_store = StaticArray.new(capacity)
+    for i in (1...capacity)
+      new_store[i-1] = self[i]
     end
+    @store = new_store
     @count -= 1
-    val
+    first_el
   end
 
   def first
@@ -106,13 +102,14 @@ class DynamicArray
   end
 
   def last
-    self[count-1]
+    self[@count - 1]
   end
 
-  def each(&prc)
-    count.times do |i|
-      prc.call(self[i])
+  def each
+    for i in (0...capacity)
+      yield self[i]
     end
+    self
   end
 
   def to_s
@@ -121,11 +118,10 @@ class DynamicArray
 
   def ==(other)
     return false unless [Array, DynamicArray].include?(other.class)
-    return false unless count == other.count
-    count.times do |i|
+    return false unless @count == other.length 
+    for i in (0...count) 
       return false unless self[i] == other[i]
     end
-
     true
   end
 
@@ -135,10 +131,15 @@ class DynamicArray
   private
 
   def resize!
-    store = StaticArray.new(2 * capacity)
-    count.times do |i|
-      store[i] = self[i]
+    new_store = StaticArray.new(2 * capacity)
+    for i in (0...capacity)
+      new_store[i] = self[i]
     end
-    @store = store
+    # each_with_index {|el, idx| new_store[idx] = el}
+    @store = new_store
+  end
+
+  def check_index(index)
+    return nil unless index.between?(-@count, @count - 1)
   end
 end
