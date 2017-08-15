@@ -18,13 +18,13 @@ class DynamicArray
 
   # O(1)
   def []=(index, value)
+    check_index(index)
     @store[(@start_idx + index) % capacity] = value
   end
 
   # O(1)
   def pop
     check_index(0)
-    # return nil if @length == 0
     last_el = @store[(@start_idx + @length-1) % capacity]
     @length -= 1
     last_el
@@ -69,7 +69,7 @@ class DynamicArray
   def resize!
     new_store = StaticArray.new(capacity * 2)
     for i in (0...capacity)
-      new_store[i] = @store[i]
+      new_store[i] = self[i]
     end
     @capacity *= 2
     @store = new_store

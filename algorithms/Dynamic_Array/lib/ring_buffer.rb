@@ -35,9 +35,7 @@ class RingBuffer
     resize! if length == capacity
     @store[(@start_idx + @length) % capacity] = val
     @length += 1
-    if @length > 9
-      p self
-    end
+
     self
   end
 
@@ -70,7 +68,7 @@ class RingBuffer
   def resize!
     new_store = StaticArray.new(capacity * 2)
     for i in (0...capacity)
-      new_store[i] = @store[i]
+      new_store[i] = self[i]
     end
     @capacity *= 2
     @store = new_store
