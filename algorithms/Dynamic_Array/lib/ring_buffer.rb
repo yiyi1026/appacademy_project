@@ -18,14 +18,14 @@ class RingBuffer
 
   # O(1)
   def []=(index, val)
-    # check_index(index)
+    check_index(index)
     @store[(@start_idx + index) % capacity] = val
   end
 
   # O(1)
   def pop
     check_index(0)
-    last_el = @store[(@start_idx + @length-1) % capacity]
+    last_el = self[@length-1]    
     @length -= 1
     last_el
   end
@@ -33,16 +33,15 @@ class RingBuffer
   # O(1) ammortized
   def push(val)
     resize! if length == capacity
-    @store[(@start_idx + @length) % capacity] = val
     @length += 1
-
+    self[@length - 1] = val
     self
   end
 
   # O(1)
   def shift
     check_index(0)
-    first_el = @store[@start_idx]
+    first_el = self[0]
     @start_idx = (@start_idx + 1)% capacity
     @length -= 1
     first_el
@@ -52,8 +51,8 @@ class RingBuffer
   def unshift(val)
     resize! if length == capacity
     @start_idx = (@start_idx - 1) % capacity
-    @store[@start_idx] = val
     @length += 1
+    self[0] = val
     self
   end
 
