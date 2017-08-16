@@ -65,21 +65,5 @@ describe LRUCache do
         lru.instance_variable_get(:@store).map { |l| l.key }
       ).to eq([0, 2, 3])
     end
-
-    it "should update the map to point at the new node" do
-      lru = LRUCache.new(3, prc)
-
-      1.upto(3) do |i|
-        expect(prc).to(
-          receive(:call).exactly(1).times.with(i).and_return(i)
-        )
-        lru.get(i)
-      end
-
-      lru.get(2)
-      list = lru.instance_variable_get(:@store)
-      map = lru.instance_variable_get(:@map)
-      expect(list.last).to be(map[2])
-    end
   end
 end

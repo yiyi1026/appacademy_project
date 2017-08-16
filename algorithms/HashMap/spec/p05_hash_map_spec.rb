@@ -106,10 +106,7 @@ describe HashMap do
 
     it "should increase the size of the store" do
       old_store_length = hash.instance_variable_get(:@store).length
-
-      # triggers resize
-      7.times { |i| hash[i] = i + 1 }
-
+      hash.send(:resize!)
       new_store_length = hash.instance_variable_get(:@store).length
 
       expect(new_store_length).to be > old_store_length
@@ -120,8 +117,7 @@ describe HashMap do
         [k, hash[k]]
       end
 
-      # triggers resize
-      7.times { |i| hash[i] = i + 1 }
+      hash.send(:resize!)
 
       contents.each do |k, v|
         expect(hash[k]).to eq(v)

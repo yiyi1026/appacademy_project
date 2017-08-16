@@ -39,7 +39,7 @@ class IntSet
   def insert(num)
     return false if include?(num)
     self[num] << num
-    # num
+    # num or self
   end
 
   def remove(num)
@@ -92,7 +92,6 @@ class ResizingIntSet
 
   def [](num)
     @store[num % num_buckets]
-    # optional but useful; return the bucket corresponding to `num`
   end
 
   def num_buckets

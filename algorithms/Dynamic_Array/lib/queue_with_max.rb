@@ -2,7 +2,7 @@
 # a method which returns the maximum element still in the queue. This
 # is trivial to do by spending O(n) time upon dequeuing.
 # Can you do it in O(1) amortized? Maybe use an auxiliary storage structure?
-
+#???????????
 # Use your RingBuffer to achieve optimal shifts! Write any additional
 # methods you need.
 
@@ -13,11 +13,13 @@ class QueueWithMax
 
   def initialize
     @store = RingBuffer.new
+    @maxqueue = RingBuffer.new
     @queue = []
   end
 
   def enqueue(val)
     @store.push(val)
+    # update_maxqueue(val)
     @queue.push(val)
     @queue.sort!
     val
@@ -25,7 +27,9 @@ class QueueWithMax
 
   def dequeue
     delete_el = @store.shift
+    # @maxqueue.shift if delete_el == @maxqueue[0]
     @queue.delete(delete_el)
+    delete_el
   end
 
   def max
