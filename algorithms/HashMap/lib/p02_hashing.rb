@@ -23,6 +23,9 @@ class String
 end
 
 class Hash
+  #explain what hashing function is doing? same input => same output
+  # order of input doesn't matter
+  # different input => different output
   # This returns 0 because rspec will break if it returns nil
   # Make sure to implement an actual Hash#hash method
   def hash
