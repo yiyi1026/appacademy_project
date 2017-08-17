@@ -15,7 +15,7 @@ class BinaryMinHeap
     # remove the last one (the previous first one)
     # order
     val = @store[0]
-    # if count > 1
+    
     if count > 1
       #swap
       @store[0] = @store.pop
@@ -43,7 +43,7 @@ class BinaryMinHeap
 
   def self.parent_index(child_index)
     raise "root has no parent" if child_index == 0
-    return (child_index - 1)/2
+    (child_index - 1)/2
   end
 
   def self.heapify_down(array, parent_index, len = array.length, &prc)

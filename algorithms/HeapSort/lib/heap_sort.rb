@@ -4,7 +4,7 @@ class Array
   def heap_sort!
     #heapify is method to return the smallest element
     #extract swap the first element with the last element, 
-    #then pop the last element(the smallest) to the result array(sorted)
+    #then pop the last element(the smallest element of array) to the result array(sorted)
     2.upto(count).each do |size|
       BinaryMinHeap.heapify_up(self, size - 1, size)
     end
