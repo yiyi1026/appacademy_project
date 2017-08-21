@@ -2,12 +2,17 @@
 #sum of the integers.
 
 def sum_recur(array)
+  return 0 if array.empty?
+  array[0] + sum_recur(array[1..-1])
 end
 
 #Problem 2: You have array of integers. Write a recursive solution to determine
 #whether or not the array contains a specific value.
 
 def includes?(array, target)
+  return false if array.empty?
+  # return true if array[0] == target
+  # return includes?([array[0]], target) || includes?(array[1..-1], target)
 end
 
 # Problem 3: You have an unsorted array of integers. Write a recursive solution
