@@ -57,8 +57,8 @@ class BinarySearchTree
       left_max_node = maximum(left_child)
       delete(left_max_node.value)
       connect(node.parent, left_max_node)
-      left_max_node.left = left_child
-      left_max_node.right = right_child
+      connect(left_max_node, left_child)
+      connect(left_max_node, right_child)
     elsif node.left
       left_child = node.left
       connect(node.parent, left_child)
