@@ -6,16 +6,10 @@ class QuickSort
   def self.sort1(array)
     return array if array.length < 2
     pivot = array[0]
-    left = []
-    right = []
-    for i in (1...array.length)
-      if pivot > array[i]
-        left.unshift(array[i])
-      else
-        right.push(array[i])
-      end
-    end
-    self.sort1(left) + [pivot] + self.sort1(right)
+    left = array.select { |el| pivot > el }
+    middle = array.select { |el| pivot == el }
+    right = array.select { |el| pivot < el }
+    self.sort1(left) + middle + self.sort1(right)
 
   end
 
@@ -23,14 +17,13 @@ class QuickSort
   def self.sort2!(array, start = 0, length = array.length, &prc)
     prc ||= Proc.new{|i, j| i <=> j}
     return array if length < 2
-    pivot_idx = self.partition(array, start, length, &prc)
+    pivot_idx = partition(array, start, length, &prc)
     l_length = pivot_idx - start
     r_length = length - l_length - 1
     self.sort2!(array, start, l_length, &prc)
     self.sort2!(array, pivot_idx + 1, r_length, &prc)
-    # p array
-    array
 
+    array
   end
 
   def self.partition(array, start, length, &prc)
