@@ -11,7 +11,6 @@ def topological_sort(vertices)
   end
 
   until top.empty?
-
     current = top.pop
     sorted << current 
 

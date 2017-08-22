@@ -9,10 +9,6 @@
 
 require_relative 'topological_sort'
 
-def has_value(vertices, value)
-  vertices.any?{|vertex|vertex.value == value}
-end
-
 def install_order(arr)
   max = arr.sort_by{|t|t[0]}[-1][0]
 
