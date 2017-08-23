@@ -2,14 +2,14 @@ class DynamicProgramming
 
   def initialize
     @cache = {}
+    @blair_cache = {1 => 1, 2 => 2}
   end
 
   def blair_nums(n)
     # top down: need to store instance variable
-
     # Check the cache for a stored answer
-    if @cache[n] 
-      return @cache[n] 
+    if @blair_cache[n] 
+      return @blair_cache[n] 
     end
     # If not found, 1) perform the recursion, 2) store the answer, 3) return the answer. 
     if n == 1
@@ -19,7 +19,7 @@ class DynamicProgramming
     else
       blair_n = blair_nums(n-1) + blair_nums(n-2) + 2 * n - 3
     end
-    @cache[n] = blair_n
+    @blair_cache[n] = blair_n
     blair_nums(n)
   end
 
@@ -114,7 +114,6 @@ class DynamicProgramming
       table[i][0] = 0
       for j in 1..capacity
         weight = value_weight_array[i-1][3]
-        p weight
         if weight <= j
           value = value_weight_array[i-1][2]
           if value + table[i-1][j-weight] > table[i-1][j]
@@ -132,6 +131,12 @@ class DynamicProgramming
 
   def maze_solver(maze, start_pos, end_pos)
     # bonus problem
+
+
+    # each position may could go up, down, left, right
+    if start_pos == end_pos
+      return [end_pos]
+    end
   end
 
 end
