@@ -33,5 +33,4 @@ def f(n)
   $cache[n]
 end
 
-p f(5)
-p $count
+p [[1]] * 6

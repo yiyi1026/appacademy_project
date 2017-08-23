@@ -41,20 +41,7 @@ class DynamicProgramming
   end
 
   def frog_hops_top_down(n)
-    # if n >= 4
-    #   4.times do
-    # return @cache[n] if @cache[n]
-    # return frog_hops_top_down_helper(n) if n < 4
-    #   end
-    # end
     frog_hops_top_down_helper(n)
-    # @cache[n] = frog_hops_top_down_helper(n)
-    # @cache[n]
-    # # (4..n).each do |i|
-    # # return @cache[n] if n < 4
-    # @cache[n] = frog_hops_top_down_helper(n-1).map{|way|way + [1]} +frog_hops_top_down_helper(n-2).map{|way|way + [2]} + frog_hops_top_down_helper(n-3).map{|way| way + [3]} if n > 3
-    # # end
-    # @cache[n]
 
   end
 
@@ -73,9 +60,37 @@ class DynamicProgramming
 
   def super_frog_hops(n, k)
 
+    if n <= 0
+      return [[]]
+    elsif n == 1
+      return [[1]]
+    elsif k == 1
+      return [[1]*n]
+    elsif n < k
+      return super_frog_hops(n, n)
+    elsif n >= k
+      total = []
+      (1..k).each do |i|
+        total += super_frog_hops(n-i, k).map{|way|way + [i]}
+      end
+      return total
+    end
+
   end
 
   def knapsack(weights, values, capacity)
+    return 0 if capacity <= 0 || weights.all?{|weight| weight > capacity}
+
+    # use hash to connect weight and value
+    hash = Hash.new { |h, k| h[k] = [] }
+    weights.each_with_index do |weight, idx|
+      hash[weight] << values[idx]
+    end
+    arr = hash.keys.sort
+    return hash[arr[0]].max if arr[0] == capacity
+
+
+
 
   end
 
@@ -88,17 +103,6 @@ class DynamicProgramming
     # bonus problem
   end
 
-  def self.combine(route1, route2)
-    p route1
-    p route2
-    result = []
-    route1.each do |path1|
-      route2.each do |path2|
-        result << path1 + path2
-      end
-    end
-    result
-  end
 end
 
 
