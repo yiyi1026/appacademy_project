@@ -5,9 +5,13 @@ class DynamicProgramming
   end
 
   def blair_nums(n)
+    # top down: need to store instance variable
+
+    # Check the cache for a stored answer
     if @cache[n] 
       return @cache[n] 
     end
+    # If not found, 1) perform the recursion, 2) store the answer, 3) return the answer. 
     if n == 1
       blair_n = 1
     elsif n == 2
@@ -16,33 +20,38 @@ class DynamicProgramming
       blair_n = blair_nums(n-1) + blair_nums(n-2) + 2 * n - 3
     end
     @cache[n] = blair_n
-
+    blair_nums(n)
   end
 
   def frog_hops_bottom_up(n)
-    cache = frog_cache_builder(n)
-    cache[n]
+    # bottom_up: helper method finishes all the logic. main function only calls the value to that key.
+    hash = frog_cache_builder(n)
+    hash[n]
   end
 
   def frog_cache_builder(n)
+    # Make a hash or array for storing previous solutions
     hash = {}
+    # Add the base cases to the cache  
+    hash[n] = [[]] if n < 0
+    
     hash[1] = [[1]]
     hash[2] = [[1, 1], [2]]
     hash[3] = [[1, 1, 1], [2, 1], [1, 2], [3]]
-  
+    
+    # Build solutions 4..n into the cache
     (4..n).each do |i|
-      hash[i] = hash[i-1].map{|way|way + [1]}
-      hash[i] += hash[i-2].map{|way|way + [2]}
-      hash[i] += hash[i-3].map{|way| way + [3]}
+      hash[i] = hash[i-1].map{|way|way + [1]} + hash[i-2].map{|way|way + [2]} + hash[i-3].map{|way| way + [3]}
     end
-  
-    return hash
+    
+    # Return the cache
+    hash
 
   end
 
   def frog_hops_top_down(n)
+    return @cache[n] if @cache[n]
     frog_hops_top_down_helper(n)
-
   end
 
   def frog_hops_top_down_helper(n)
@@ -51,10 +60,11 @@ class DynamicProgramming
     @cache[1] = [[1]] unless @cache[1]
     @cache[2] = [[1, 1], [2]] unless @cache[2]
     @cache[3] = [[1, 1, 1], [2, 1], [1, 2], [3]] unless @cache[3]
-    # return @cache[n] if n < 4
+
     (4..n).each do |i|
-      @cache[i] = frog_hops_top_down_helper(i-1).map{|way|way + [1]} + frog_hops_top_down_helper(i-2).map{|way|way + [2]} + frog_hops_top_down_helper(i-3).map{|way| way + [3]}
+      @cache[i] = frog_hops_top_down_helper(i-1).map{|way|way + [1]} + frog_hops_top_down_helper(i-2).map{|way|way + [2]} + frog_hops_top_down_helper(i-3).map{|way| way + [3]} unless @cache[i]
     end
+
     @cache[n]
   end
 
