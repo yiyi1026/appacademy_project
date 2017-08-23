@@ -89,24 +89,45 @@ class DynamicProgramming
   end
 
   def knapsack(weights, values, capacity)
-    return 0 if capacity <= 0 || weights.all?{|weight| weight > capacity}
-
-    # use hash to connect weight and value
-    hash = Hash.new { |h, k| h[k] = [] }
-    weights.each_with_index do |weight, idx|
-      hash[weight] << values[idx]
-    end
-    arr = hash.keys.sort
-    return hash[arr[0]].max if arr[0] == capacity
-
-
-
-
+    # bottom_up: helper method finishes all the logic. main function only calls the value to that key.
+    table = knapsack_table(weights, values, capacity)
+    table[weights.length][capacity]
   end
 
   # Helper method for bottom-up implementation
   def knapsack_table(weights, values, capacity)
-
+    return 0 if capacity <= 0 || weights.all?{|weight| weight > capacity}
+    # use hash to connect weight and value
+    
+    hash = Hash.new { |h, k| h[k] = [] }
+    value_weight_array = []
+    weights.each_with_index do |weight, idx|
+      # idx, value/weight, value, weight
+      value_weight_array << [idx, values[idx]*1.0/weight, values[idx], weight]
+    end
+    value_weight_array = value_weight_array.sort_by{|el|-el[1]}
+    # i for row j for col(weight)
+    # value_weight_array.each do ||
+    table = Array.new(weights.length+1){Array.new(capacity+ 1)}
+    table[0] = [0] * (capacity + 1)
+    for i in 1...table.length
+      table[i][0] = 0
+      for j in 1..capacity
+        weight = value_weight_array[i-1][3]
+        p weight
+        if weight <= j
+          value = value_weight_array[i-1][2]
+          if value + table[i-1][j-weight] > table[i-1][j]
+            table[i][j] = value + table[i-1][j-weight]
+          else
+            table[i][j] = table[i-1][j]
+          end
+        else
+          table[i][j] = table[i-1][j]
+        end
+      end
+    end
+    table
   end
 
   def maze_solver(maze, start_pos, end_pos)
