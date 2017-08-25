@@ -126,6 +126,7 @@ class DynamicProgramming
         end
       end
     end
+    
     table
   end
 
