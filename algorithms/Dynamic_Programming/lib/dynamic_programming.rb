@@ -126,13 +126,12 @@ class DynamicProgramming
         end
       end
     end
-    
+
     table
   end
 
   def maze_solver(maze, start_pos, end_pos)
     # bonus problem
-
 
     # each position may could go up, down, left, right
     if start_pos == end_pos
