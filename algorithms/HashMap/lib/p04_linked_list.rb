@@ -17,6 +17,9 @@ class Node
     # and removes self from list.
     @prev.next = @next if @prev
     @next.prev = @prev if @next
+    # @next = nil
+    # @prev = nil
+    # self
   end
 end
 
@@ -36,10 +39,12 @@ class LinkedList
   end
 
   def first
+    # empty? ? nil : @head.next
     @head.next
   end
 
   def last
+    # empty? ? nil : @tail.prev
     @tail.prev
   end
 
@@ -57,6 +62,7 @@ class LinkedList
     each do |node|
       return true if node.key == key
     end
+
     false
   end
 
@@ -72,8 +78,8 @@ class LinkedList
       old_last = @tail.prev
       old_last.next = new_node
       new_node.prev = old_last
-      @tail.prev = new_node
       new_node.next = @tail
+      @tail.prev = new_node
     end   
 
     new_node
@@ -98,11 +104,11 @@ class LinkedList
     end
   end
 
-  def each
+  def each(&prc)
     current_node = @head.next
-    until current_node.nil?
-      return if current_node == @tail
-      yield current_node
+    
+    until current_node == @tail
+      prc.call(current_node) if block_given?
       current_node = current_node.next
     end
 
