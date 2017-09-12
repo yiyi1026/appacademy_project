@@ -3,7 +3,6 @@ def exp(b, n)
   if n > 0
     b * exp(b, n-1)
   else
-    p b
     exp(b * 1.0,n+1) * ( 1.0/ b)
   end
 end
@@ -66,9 +65,10 @@ def bsearch(arr, target)
 
   return nil if arr.empty?
   middle = arr.length / 2
-  if arr[middle] == target
+  case arr[middle] <=> target
+  when 0
     return middle
-  elsif arr[middle] > target
+  when 1
     bsearch(arr[0...middle], target)
   else
     result = bsearch(arr[(middle+1)..-1], target)
@@ -80,7 +80,6 @@ def merge_sort(arr)
   return arr if arr.length <2
   first_half = merge_sort(arr[0...arr.length/2])
   second_half = merge_sort(arr[arr.length/2..-1])
-  p "test"
   merge_sort(first_half, second_half)
 end
 
