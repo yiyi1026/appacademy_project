@@ -1,12 +1,11 @@
 class Array
 
   def my_uniq
-    uniq_arr = []
+    uniq = {}
     each do |el|
-      uniq_arr << el unless uniq_arr.include?(el)
+      uniq[el] = true
     end
-
-    uniq_arr
+    uniq.keys
   end
 
   def two_sum

@@ -1,10 +1,12 @@
 # PHASE 2
 def convert_to_int(str)
-  Integer(str)
-  rescue ArgumentError => e
-    puts "You made a mistake."
-    puts "Error was #{e}"
-    return nil
+  begin
+    int = Integer(str)
+  rescue ArgumentError
+    puts "Could not convert"
+  ensure
+    int ||= nil
+  end
 
 end
 
