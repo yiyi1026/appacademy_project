@@ -114,3 +114,4 @@ SQLite3::SQLException: no such column: users.user_id: SELECT  "users".* FROM "us
   [1m[36mCourse Load (0.1ms)[0m  [1mSELECT "courses".* FROM "courses" ORDER BY "courses"."id" ASC LIMIT 1[0m
   [1m[35mCourse Load (0.1ms)[0m  SELECT "courses".* FROM "courses" ORDER BY "courses"."id" DESC LIMIT 1
   [1m[36mCourse Load (0.2ms)[0m  [1mSELECT "courses".* FROM "courses" WHERE "courses"."id" = ? ORDER BY "courses"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
