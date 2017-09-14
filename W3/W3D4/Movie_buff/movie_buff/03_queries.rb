@@ -12,8 +12,10 @@ end
 
 def golden_age
   # Find the decade with the highest average movie score.
-  Movie.select(:yr)
-  .group("yr::int/10*10")
+  Movie.select("AVG(score)", "(yr/10*10) as decade")
+  .group("decade")
+  .order("AVG(score) desc")
+  .first.decade
 
 end
 
@@ -25,6 +27,11 @@ end
 
 def actor_out_of_work
   # Find the number of actors in the database who have not appeared in a movie
+  Actor
+    .select(:name)
+    .joins("left outer join castings on actors.id = castings.actor_id")
+    .where("castings.movie_id is NULL")
+    .count 
 
 end
 
