@@ -1,27 +1,40 @@
+# == Schema Information
+#
+# Table name: responses
+#
+#  id               :integer          not null, primary key
+#  answer_choice_id :integer
+#  user_id          :integer
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#
+
 class Response < ApplicationRecord
+  validates :answer_choice, :respondent, presence: true
+  validate :respondent_already_answered?
+
   belongs_to :respondent,
-    primary_key: :id,
     foreign_key: :user_id,
     class_name: :User
 
+  belongs_to :answer_choice
 
-  belongs_to :answer_choice,
-    primary_key: :id,
-    foreign_key: :answer_choice_id,
-    class_name: :AnswerChoice
-
-  has_one :question,
-    through: :answer_choice,
-    source: :question
+  has_one :question, through: :answer_choice
 
   def sibling_responses
-    question.responses.where.not(id: self.id)
+    self.question.responses.where.not(id: self.id)
 
   end
+
   def respondent_already_answered?
-    sibling_responses.exists?(user_id: self.id, answer_choice_id: self.answer_choice_id)
+    sibling_responses.exists?(user_id: self.user_id, answer_choice_id: self.answer_choice_id)
   end
 
-  validate :
+  private
+
+  def respondent_could_only_answer_once
+    if respondent_already_answered?
+      errors[:respondent_id] << 'cannot vote twice for question'
+    end
 
 end
