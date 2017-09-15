@@ -19,4 +19,13 @@ class Question < ApplicationRecord
   has_many :responses,
     through: :answer_choices,
     source: :responses
+
+
+  def results
+    # self.responses.count
+
+    # refactor
+    self.answer_choices
+
+  end
 end
