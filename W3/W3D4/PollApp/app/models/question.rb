@@ -22,10 +22,25 @@ class Question < ApplicationRecord
 
 
   def results
-    # self.responses.count
+    # n + 1
+    results = {}
+    self.answer_choices.each do |an_ch|
+      results[an_ch.text] = an_ch.responses.count
+    end
 
-    # refactor
-    self.answer_choices
+    results
+
+    # refactor 1
+    #1. pre-fetch all the responses when you fetch the answer_choices(not only the account)
+
+    # results = {}
+    # self.answer_choices.includes(:responses).each do |an_ch|
+    #   results[an_ch.text] = an_ch.responses.length
+    # end
+    # results
+
+    # refactor 2
+
 
   end
 end
