@@ -40,7 +40,36 @@ class Question < ApplicationRecord
     # results
 
     # refactor 2
+    # 1-query way all SQL, aA solution
+    # acs = AnswerChoice.find_by_sql([<<-SQL, id])
+    #   SELECT
+    #     answer_choices.text, COUNT(responses.id) AS num_responses
+    #   FROM
+    #     answer_choices
+    #     LEFT OUTER JOIN responses
+    #       ON answer_choices.id = responses.answer_choice_id
+    #   WHERE
+    #     answer_choices.question_id = ?
+    #   GROUP BY
+    #     answer_choices.id
+    # SQL
 
+    # acs.inject({}) do |results, ac|
+    #   results[ac.text] = ac.num_responses; results
+    # end
+
+    # 1-query way w/ ActiveRecord
+    # less efficient solutions are given above ^
+    acs = self.answer_choices
+              .select("answer_choices.text, COUNT(responses.id) AS num_responses")
+              .joins(<<-SQL).group("answer_choices.id")
+              LEFT OUTER JOIN responses
+              ON answer_choices.id = responses.answer_choice_id
+              SQL
+
+    acs.inject({}) do |results, ac|
+      results[ac.text] = ac.num_responses; results
+    end
 
   end
 end
