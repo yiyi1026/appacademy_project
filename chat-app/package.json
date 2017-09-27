@@ -1,0 +1,36 @@
+{
+  "name": "chatapp",
+  "version": "1.0.0",
+  "description": "Minimal chat app in NodeJS with Socket.io",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "engines": {
+    "node": ">=8.1.0"
+  },
+  "scripts": {
+    "build": "webpack --watch",
+    "start:dev": "nodemon app.js",
+    "start:debug": "DEBUG=* node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Pklong/chatapp.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Pklong/chatapp/issues"
+  },
+  "homepage": "https://github.com/Pklong/chatapp#readme",
+  "dependencies": {
+    "express": "^4.15.3",
+    "socket.io": "^2.0.3",
+    "webpack": "^3.4.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0"
+  }
+}
