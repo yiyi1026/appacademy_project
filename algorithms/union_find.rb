@@ -1,4 +1,7 @@
 class UnionFind
+  # quick-find algorithms take O(n) to initialize and O(n) to union
+  # Together it's O(n2)
+
 
   attr_reader :store
   def initialize(n)
