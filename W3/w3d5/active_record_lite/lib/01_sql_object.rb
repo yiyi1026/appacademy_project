@@ -52,12 +52,10 @@ class SQLObject
 
   def self.parse_all(results)
     results.map { |result| new(result) }
-    # ...
   end
 
   def self.find(id)
     all.find { |obj| obj.id == id }
-    # ...
   end
 
   def initialize(params = {})
@@ -69,8 +67,6 @@ class SQLObject
         raise "unknown attribute '#{attr_name}'"
       end
     end
-
-    # self.class.all << self
   end
 
   def attributes
@@ -79,8 +75,7 @@ class SQLObject
   end
 
   def attribute_values
-    attributes.values
-
+    self.class.columns.map { |attr| self.send(attr) }
   end
 
   def insert
@@ -88,7 +83,7 @@ class SQLObject
     col_names = columns.map(&:to_s).join(", ")
     col_length = columns.length
     question_marks = (["?"] * col_length).join(", ")
-    result = DBConnection.execute(<<-SQL, *attribute_values)
+    result = DBConnection.execute(<<-SQL, *attribute_values.drop(1))
     INSERT INTO
       #{self.class.table_name} (#{col_names})
     VALUES
@@ -112,11 +107,6 @@ class SQLObject
   end
 
   def save
-    if id.nil?
-      insert
-    else
-      update
-    end
+    id.nil? ? insert : update
   end
-  # self.finalize!
 end
