@@ -23,7 +23,15 @@ const fs = require('fs');
 //1. pass information into script from command line.
 //1.1 Node provides a global process object which will allow us to pass arbitrary args from our terminal. No need to require process.
 
-// console.log(process);
+console.log(process);
 
 //process.argv return  an array of two args: the absolute paths of Node executable and the file
-console.log(process.argv);
+let letter = process.argv[2];
+
+// fs.writeFile('./${letter}_animals.txt', 'I will be written to ${letter}_animals.txt', err => {
+//   if (err){
+//     console.log(err);
+//   }else{
+//     console.log('file successfully written!');
+//   }
+// })
